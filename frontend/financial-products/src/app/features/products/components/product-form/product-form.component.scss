@@ -139,3 +139,27 @@ input[disabled] {
 .submit-btn:hover {
   background: #ffec99;
 }
+
+input[type="date"] {
+  padding: 0.7rem 1rem;
+  border: 1.5px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  margin-bottom: 0.2rem;
+  background: #fff;
+  transition: border 0.2s;
+  color: #22336b;
+}
+
+input[type="date"].error {
+  border: 2px solid #e53935;
+}
+
+input[type="date"]::-webkit-input-placeholder {
+  color: #b0b3b8;
+}
+
+input[type="date"]:focus {
+  border: 2px solid #22336b;
+}
