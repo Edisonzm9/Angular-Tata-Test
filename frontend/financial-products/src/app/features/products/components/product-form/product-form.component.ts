@@ -97,7 +97,17 @@ export class ProductFormComponent {
           this.productForm.reset();
         },
         error: (err) => {
-          this.errorMessage = err?.error?.message || 'Error al guardar el producto.';
+          if (err.status === 400) {
+            this.errorMessage = err.message;
+            // Si hay errores de validación específicos, puedes mostrarlos aquí
+            if (err.errors) {
+              this.errorMessage += ': ' + Object.values(err.errors).join(' ');
+            }
+          } else if (err.status === 404) {
+            this.errorMessage = 'No se encontró el recurso solicitado.';
+          } else {
+            this.errorMessage = 'Error inesperado en el servidor.';
+          }
           this.loading = false;
         }
       });
