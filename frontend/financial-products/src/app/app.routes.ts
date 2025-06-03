@@ -1,13 +1,17 @@
 import { Routes } from '@angular/router';
 import { ProductListComponent } from './features/products/pages/product-list/product-list.component';
-import { ProductFormComponent } from './features/products/pages/product-form/product-form.component';
-import { ProductEditComponent } from './features/products/pages/product-edit/product-edit.component';
 
 /**
- * Definición de rutas principales de la aplicación Financial Products.
+ * Definición de rutas principales de la aplicación Financial Products con lazy loading para formularios.
  */
 export const routes: Routes = [
   { path: '', component: ProductListComponent },
-  { path: 'new', component: ProductFormComponent },
-  { path: 'edit/:id', component: ProductEditComponent }
+  {
+    path: 'new',
+    loadComponent: () => import('./features/products/pages/product-form/product-form.component').then(m => m.ProductFormComponent)
+  },
+  {
+    path: 'edit/:id',
+    loadComponent: () => import('./features/products/pages/product-edit/product-edit.component').then(m => m.ProductEditComponent)
+  }
 ];

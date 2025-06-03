@@ -189,11 +189,13 @@
             : displayedProducts.length + " resultados"
         }}
       </span>
-      <select [value]="pageSize" (change)="onPageSizeChange($event)">
+      <label for="page-size-select" class="visually-hidden">Resultados por página</label>
+      <select id="page-size-select" [value]="pageSize" (change)="onPageSizeChange($event)">
         <option>5</option>
         <option>10</option>
         <option>20</option>
       </select>
     </div>
+      
   </div>
 </div>
