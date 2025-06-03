@@ -1,1 +1,42 @@
-<p>product-list works!</p>
+<div class="product-list-container">
+  <div class="header">
+    <img src="assets/bank-icon.svg" alt="Banco" class="bank-icon" />
+    <span class="bank-title">BANCO</span>
+  </div>
+  <div class="search-bar">
+    <input type="text" placeholder="Search..." />
+  </div>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Logo</th>
+          <th>Nombre del producto <span class="info">i</span></th>
+          <th>Descripción <span class="info">i</span></th>
+          <th>Fecha de liberación <span class="info">i</span></th>
+          <th>Fecha de reestructuración <span class="info">i</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of [1,2,3,4,5]">
+          <td><div class="logo-placeholder">JG</div></td>
+          <td>Nombre del producto</td>
+          <td>Descripción</td>
+          <td>01/01/2000</td>
+          <td>01/01/2001</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="progress-bar">
+      <div class="progress"></div>
+    </div>
+    <div class="footer">
+      <span>5 Resultados</span>
+      <select>
+        <option>5</option>
+        <option>10</option>
+        <option>20</option>
+      </select>
+    </div>
+  </div>
+</div>
