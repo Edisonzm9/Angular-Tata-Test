@@ -5,41 +5,11 @@ import { ModalDeleteComponent } from '../modal-delete/modal-delete.component';
 import { of, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { FinancialProductService } from '../../services/financial-product.service';
+import { By } from '@angular/platform-browser';
 
-// Mocks posibles para Router
-const mockRouter = {
-  navigate: () => {},
-  navigateByUrl: () => {},
-  url: '/',
-  events: of([]),
-  createUrlTree: () => ({}),
-  serializeUrl: () => '',
-  resetConfig: () => {},
-  isActive: () => false,
-  getCurrentNavigation: () => null,
-  routerState: {},
-  config: [],
-  errorHandler: () => {},
-  dispose: () => {},
-  onSameUrlNavigation: 'reload',
-  initialNavigation: () => {},
-  setUpLocationChangeListener: () => {}
-};
-
-// Mocks posibles para FinancialProductService
+const mockRouter = { navigate: jest.fn() };
 const mockFinancialProductService = {
-  getById: () => of({}),
-  updateProduct: () => of({}),
-  getAll: () => of([]),
-  createProduct: () => of({}),
-  verifyId: () => of(false),
-  deleteProduct: () => of({ message: 'Producto eliminado exitosamente.' }),
-  // Métodos no relevantes
-  someUnusedMethod: () => of(null),
-  anotherHelperMethod: () => {},
-  extraSyncMethod: () => true,
-  extraAsyncMethod: () => Promise.resolve('ok'),
-  extraObservableMethod: () => of('extra')
+  deleteProduct: jest.fn().mockReturnValue(of({ message: 'Producto eliminado exitosamente.' }))
 };
 
 describe('ProductDropdownComponent', () => {
@@ -67,21 +37,83 @@ describe('ProductDropdownComponent', () => {
     component = fixture.componentInstance;
     component.product = mockProduct;
     fixture.detectChanges();
+    jest.clearAllMocks();
   });
 
   it('debe crear el componente', () => {
     expect(component).toBeTruthy();
   });
 
-  // Test simple de renderizado de menú
   it('debe mostrar el menú al hacer click en el botón', () => {
     component.toggleMenu(new MouseEvent('click'));
     expect(component.showMenu).toBeTruthy();
   });
 
-  // Test simple de abrir modal de eliminar
+  it('debe ocultar el menú al llamar closeMenu()', () => {
+    component.showMenu = true;
+    component.closeMenu();
+    expect(component.showMenu).toBeFalsy();
+  });
+
+  it('debe navegar al editar producto y cerrar el menú', () => {
+    const spy = jest.spyOn(mockRouter, 'navigate');
+    component.showMenu = true;
+    component.editProduct();
+    expect(spy).toHaveBeenCalledWith(['/edit', mockProduct.id]);
+    expect(component.showMenu).toBeFalsy();
+  });
+
   it('debe mostrar el modal de eliminar al llamar deleteProduct()', () => {
     component.deleteProduct();
     expect(component.showDeleteModal).toBeTruthy();
+    expect(component.showMenu).toBeFalsy();
+  });
+
+  it('debe ocultar el modal al cancelar', () => {
+    component.showDeleteModal = true;
+    component.onCancelDelete();
+    expect(component.showDeleteModal).toBeFalsy();
+  });
+
+  it('debe llamar deleteProduct del servicio y recargar al confirmar', () => {
+
+    const originalLocation = window.location;
+
+    // @ts-ignore
+    delete window.location;
+    // @ts-ignore
+    window.location = { ...originalLocation, reload: jest.fn() };
+
+    // --- tu test ---
+    component.deleting = false;
+    component.showDeleteModal = true;
+    component.onConfirmDelete();
+
+    expect(component.deleting).toBe(false);
+    expect(component.showDeleteModal).toBe(false);
+    expect(mockFinancialProductService.deleteProduct).toHaveBeenCalledWith('1');
+    expect(window.location.reload).toHaveBeenCalled();
+
+    // Restaura el window.location original después del test
+    window.location = originalLocation;
+  });
+
+
+  it('debe mostrar error al eliminar si hay error', () => {
+    mockFinancialProductService.deleteProduct.mockReturnValueOnce(
+      throwError(() => ({ message: 'Error al eliminar el producto' }))
+    );
+    component.onConfirmDelete();
+    expect(component.error).toBe('Error al eliminar el producto');
+    expect(component.deleting).toBe(false);
+  });
+
+  it('debe evitar error si el error no tiene message', () => {
+    mockFinancialProductService.deleteProduct.mockReturnValueOnce(
+      throwError(() => ({}))
+    );
+    component.onConfirmDelete();
+    expect(component.error).toBe('Error al eliminar el producto');
+    expect(component.deleting).toBe(false);
   });
 });
