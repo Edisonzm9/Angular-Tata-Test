@@ -1,30 +1,61 @@
+
+
+<p align="center">
+  <img src="https://img.shields.io/badge/angular-v16-red"/>
+  <img src="https://img.shields.io/badge/coverage-80%25-brightgreen"/>
+  <img src="https://img.shields.io/badge/license-MIT-blue"/>
+</p>
+
 # Financial Products App
 
-Aplicación web para la gestión de productos financieros, desarrollada con Angular siguiendo principios de Clean Code y SOLID.
+Aplicación web para la gestión de productos financieros, desarrollada con Angular siguiendo Clean Code y principios SOLID.
 
-## Tabla de Contenidos
-- [Descripción](#descripción)
-- [Características](#características)
-- [Estructura del Proyecto](#estructura-del-proyecto)
-- [Instalación](#instalación)
-- [Uso](#uso)
-- [Scripts Disponibles](#scripts-disponibles)
-- [Buenas Prácticas](#buenas-prácticas)
-- [Dependencias Principales](#dependencias-principales)
-- [Autor](#autor)
+## 📚 Tabla de Contenidos
+- [📝 Descripción](#descripción)
+- [✨ Características](#características)
+- [🖥️ Demo Visual](#demo-visual)
+- [📂 Estructura del Proyecto](#estructura-del-proyecto)
+- [🚀 Instalación](#instalación)
+- [💻 Uso](#uso)
+- [🧪 Scripts Disponibles](#scripts-disponibles)
+- [📐 Buenas Prácticas](#buenas-prácticas)
+- [📦 Dependencias Principales](#dependencias-principales)
+- [👨‍💻 Autor](#autor)
 
-## Descripción
-Esta aplicación permite listar, crear, editar y eliminar productos financieros, integrando validaciones avanzadas y una experiencia de usuario moderna.
+---
 
-## Características
-- Listado y búsqueda de productos financieros
-- Creación y edición con validaciones reactivas
-- Eliminación con confirmación modal
-- Manejo centralizado de errores
-- Código documentado y limpio, sin plantillas prefabricadas
+## 📝 Descripción
+> **Nota:** Esta aplicación fue desarrollada como challenge técnico, cuidando la mantenibilidad, escalabilidad y experiencia de usuario.
 
-## Estructura del Proyecto
-```
+Gestiona productos financieros: listar, crear, editar y eliminar, todo con validaciones avanzadas y diseño responsive.
+
+---
+
+## ✨ Características
+- 📋 Listado y búsqueda de productos
+- ➕ Creación y edición con formularios reactivos
+- 🗑️ Eliminación con confirmación modal
+- ⚡️ Pantallas de precarga (Skeletons)
+- 🛡️ Manejo centralizado de errores
+- 💎 Código limpio y 100% documentado
+
+---
+
+## 🖥️ Demo Visual
+
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/00000000/financial_list.gif" width="80%" />
+  <br>
+  <img src="https://user-images.githubusercontent.com/00000000/modal_demo.gif" width="40%"/>
+</div>
+
+---
+
+## 📂 Estructura del Proyecto
+<details>
+  <summary>Ver estructura</summary>
+
+```bash
 frontend/financial-products/
 ├── src/app/
 │   ├── features/products/
@@ -37,43 +68,4 @@ frontend/financial-products/
 │   └── app.config.ts
 ├── environments/
 └── ...
-```
 
-## Instalación
-1. Clona el repositorio:
-   ```bash
-   git clone <https://github.com/Edisonzm9/Angular-Tata-Test.git>
-   cd frontend/financial-products
-   ```
-2. Instala las dependencias:
-   ```bash
-   npm install
-   ```
-
-## Uso
-1. Inicia el servidor de desarrollo:
-   ```bash
-   npm start
-   ```
-2. Accede a la app en [http://localhost:4200](http://localhost:4200)
-
-## Scripts Disponibles
-- `npm start`: Inicia la app en modo desarrollo
-- `npm run build`: Compila la app para producción
-- `npm test`: Ejecuta las pruebas unitarias
-
-## Buenas Prácticas
-- Principios SOLID y Clean Code aplicados en todos los componentes y servicios
-- Comentarios explicativos en cada archivo principal
-- Separación clara de responsabilidades
-- Eliminación de código prefabricado innecesario
-- Uso de formularios reactivos y validaciones personalizadas
-
-## Dependencias Principales
-- Angular
-- RxJS
-- Angular Forms
-- Angular Router
-
-## Autor
-Desarrollado por [Edison]. 
