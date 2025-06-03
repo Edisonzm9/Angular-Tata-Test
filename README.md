@@ -40,15 +40,6 @@ Gestiona productos financieros: listar, crear, editar y eliminar, todo con valid
 
 ---
 
-## 🖥️ Demo Visual
-
-<div align="center">
-  <img src="https://user-images.githubusercontent.com/00000000/financial_list.gif" width="80%" />
-  <br>
-  <img src="https://user-images.githubusercontent.com/00000000/modal_demo.gif" width="40%"/>
-</div>
-
----
 
 ## 📂 Estructura del Proyecto
 <details>
@@ -67,4 +58,5 @@ frontend/financial-products/
 │   └── app.config.ts
 ├── environments/
 └── ...
+
 
