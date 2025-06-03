@@ -3,6 +3,9 @@ import { ProductListComponent } from './features/products/pages/product-list/pro
 import { ProductFormComponent } from './features/products/pages/product-form/product-form.component';
 import { ProductEditComponent } from './features/products/pages/product-edit/product-edit.component';
 
+/**
+ * Definición de rutas principales de la aplicación Financial Products.
+ */
 export const routes: Routes = [
   { path: '', component: ProductListComponent },
   { path: 'new', component: ProductFormComponent },

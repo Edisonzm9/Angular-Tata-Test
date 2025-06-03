@@ -53,6 +53,7 @@ describe('ProductEditComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
+
   function fillForm(valid = true) {
     component.productForm.setValue({
       id: valid ? '1' : '',
@@ -62,12 +63,10 @@ describe('ProductEditComponent', () => {
       date_release: valid ? '2025-01-01' : '',
       date_revision: valid ? '2026-01-01' : ''
     });
-    // Fuerza la actualización de validaciones dependientes
+   
     component.productForm.get('date_release')?.updateValueAndValidity();
     component.productForm.get('date_revision')?.updateValueAndValidity();
   }
-  
-
 
   it('debe crear el componente', () => {
     expect(component).toBeTruthy();
@@ -93,12 +92,28 @@ describe('ProductEditComponent', () => {
     });
   });
 
-  // Agrega algún test extra simple para cubrir ramas si lo quieres...
   it('debe dejar el formulario inválido si faltan campos', () => {
     fillForm(false);
     expect(component.productForm.valid).toBeFalsy();
   });
 
+  it('debe marcar error en date_release si es menor a hoy', () => {
+    fillForm();
+    const hoy = new Date();
+    hoy.setDate(hoy.getDate() - 1); // ayer
+    component.productForm.get('date_release')?.setValue(hoy.toISOString().slice(0, 10));
+    component.productForm.get('date_release')?.updateValueAndValidity();
+    expect(component.productForm.get('date_release')?.errors).toEqual({ dateReleaseInvalid: true });
+  });
 
+
+  it('debe marcar error en date_revision si no es un año después de date_release', () => {
+    fillForm();
+    // date_release: 2025-01-01, ponemos date_revision: 2025-01-01
+    component.productForm.get('date_revision')?.setValue('2025-01-01');
+    component.productForm.get('date_revision')?.updateValueAndValidity();
+    expect(component.productForm.get('date_revision')?.errors).toEqual({ dateRevisionInvalid: true });
+  });
 
 });
+

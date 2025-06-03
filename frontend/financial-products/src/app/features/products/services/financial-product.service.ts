@@ -4,14 +4,29 @@ import { Observable, map, catchError, throwError } from 'rxjs';
 import { FinancialProduct } from '../../../core/models/financial-product.model';
 import { environment } from '../../../../environments/environment.prod';
 
+/**
+ * Servicio para gestionar operaciones CRUD de productos financieros.
+ *
+ * Centraliza la comunicación con la API y el manejo de errores para las operaciones sobre productos.
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class FinancialProductService {
+  /**
+   * URL base de la API para productos financieros.
+   */
   private readonly API_URL = environment.api.products;
 
+  /**
+   * Inyecta el cliente HTTP para realizar peticiones a la API.
+   */
   constructor(private http: HttpClient) { }
 
+  /**
+   * Obtiene todos los productos financieros.
+   * @returns Observable con la lista de productos.
+   */
   getAll(): Observable<FinancialProduct[]> {
     return this.http.get<{ data: FinancialProduct[] }>(this.API_URL)
       .pipe(
@@ -38,6 +53,11 @@ export class FinancialProductService {
       );
   }
 
+  /**
+   * Crea un nuevo producto financiero.
+   * @param product Producto a crear.
+   * @returns Observable con la respuesta de la API.
+   */
   createProduct(product: FinancialProduct): Observable<any> {
     return this.http.post(this.API_URL, product).pipe(
       map((resp: any) => resp),
@@ -63,6 +83,11 @@ export class FinancialProductService {
     );
   }
 
+  /**
+   * Obtiene un producto financiero por su ID.
+   * @param id Identificador del producto.
+   * @returns Observable con el producto encontrado.
+   */
   getById(id: string): Observable<FinancialProduct> {
     return this.http.get<any>(`${this.API_URL}/${id}`)
       .pipe(
@@ -83,6 +108,12 @@ export class FinancialProductService {
       );
   }
 
+  /**
+   * Actualiza un producto financiero existente.
+   * @param id Identificador del producto.
+   * @param product Datos actualizados del producto.
+   * @returns Observable con la respuesta de la API.
+   */
   updateProduct(id: string, product: FinancialProduct): Observable<any> {
     return this.http.put(`${this.API_URL}/${id}`, product).pipe(
       map((resp: any) => resp),
@@ -108,12 +139,20 @@ export class FinancialProductService {
     );
   }
 
-  // financial-product.service.ts
+  /**
+   * Verifica si un ID de producto ya existe en la base de datos.
+   * @param id ID a verificar.
+   * @returns Observable que emite true si el ID existe, false en caso contrario.
+   */
   verifyId(id: string): Observable<boolean> {
     return this.http.get<boolean>(`/bp/products/verification/${id}`);
   }
 
-
+  /**
+   * Elimina un producto financiero por su ID.
+   * @param id Identificador del producto a eliminar.
+   * @returns Observable con la respuesta de la API.
+   */
   deleteProduct(id: string): Observable<any> {
     return this.http.delete(`${this.API_URL}/${id}`).pipe(
       map((resp: any) => resp),

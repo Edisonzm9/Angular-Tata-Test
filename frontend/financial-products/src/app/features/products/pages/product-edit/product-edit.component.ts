@@ -5,6 +5,11 @@ import { FinancialProductService } from '../../services/financial-product.servic
 import { CommonModule } from '@angular/common';
 import { FinancialProduct } from '../../../../core/models/financial-product.model';
 
+/**
+ * Componente para la edición de productos financieros.
+ * 
+ * Permite cargar, validar y actualizar la información de un producto financiero existente.
+ */
 @Component({
   selector: 'app-product-edit',
   standalone: true,
@@ -13,17 +18,36 @@ import { FinancialProduct } from '../../../../core/models/financial-product.mode
   styleUrl: './product-edit.component.scss'
 })
 export class ProductEditComponent implements OnInit {
+  /**
+   * Formulario reactivo para la edición del producto.
+   */
   productForm: FormGroup;
+
+  /**
+   * Indica si se está realizando una operación de carga o guardado.
+   */
   loading = false;
+
+  /**
+   * Mensaje de éxito tras actualizar el producto.
+   */
   successMessage: string | null = null;
+
+  /**
+   * Mensaje de error en caso de fallo al cargar o actualizar.
+   */
   errorMessage: string | null = null;
 
+  /**
+   * Inyecta servicios para formularios, rutas, navegación y operaciones de producto.
+   */
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private productService: FinancialProductService
   ) {
+    // Inicializa el formulario con validaciones personalizadas y estándar.
     this.productForm = this.fb.group({
       id: [{ value: '', disabled: true }, [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
       name: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
@@ -34,6 +58,9 @@ export class ProductEditComponent implements OnInit {
     });
   }
 
+  /**
+   * Carga los datos del producto a editar al inicializar el componente.
+   */
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
@@ -52,6 +79,10 @@ export class ProductEditComponent implements OnInit {
     }
   }
 
+  /**
+   * Validador personalizado para la fecha de lanzamiento.
+   * Valida que la fecha no sea anterior a hoy.
+   */
   dateReleaseValidator() {
     return (control: AbstractControl): ValidationErrors | null => {
       if (!control.value) return null;
@@ -65,6 +96,10 @@ export class ProductEditComponent implements OnInit {
     };
   }
 
+  /**
+   * Validador personalizado para la fecha de revisión.
+   * Valida que la fecha de revisión sea exactamente un año después de la fecha de lanzamiento.
+   */
   dateRevisionValidator() {
     return (control: AbstractControl): ValidationErrors | null => {
       if (!control.parent) return null;
@@ -86,6 +121,9 @@ export class ProductEditComponent implements OnInit {
     };
   }
 
+  /**
+   * Envía el formulario si es válido, actualiza el producto y gestiona los mensajes de estado.
+   */
   onSubmit() {
     if (this.productForm.valid) {
       this.loading = true;
@@ -119,6 +157,11 @@ export class ProductEditComponent implements OnInit {
     }
   }
 
+  /**
+   * Formatea una fecha a formato yyyy-MM-dd.
+   * @param date Fecha a formatear.
+   * @returns Fecha en formato yyyy-MM-dd.
+   */
   formatDate(date: string): string {
     const d = new Date(date);
     const month = (d.getMonth() + 1).toString().padStart(2, '0');
@@ -126,9 +169,15 @@ export class ProductEditComponent implements OnInit {
     return `${d.getFullYear()}-${month}-${day}`;
   }
 
+  /**
+   * Resetea el formulario a su estado inicial.
+   */
   onReset() {
     this.productForm.reset();
   }
 
+  /**
+   * Acceso rápido a los controles del formulario para facilitar la validación en la vista.
+   */
   get f() { return this.productForm.controls; }
 }

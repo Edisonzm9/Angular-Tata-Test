@@ -5,6 +5,11 @@ import { Observable, of } from 'rxjs';
 import { map, catchError, first } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
 
+/**
+ * Componente para la creación de productos financieros.
+ *
+ * Permite registrar un nuevo producto, validando tanto de forma síncrona como asíncrona los datos ingresados.
+ */
 @Component({
   selector: 'app-product-form',
   standalone: true,
@@ -13,13 +18,36 @@ import { CommonModule } from '@angular/common';
   styleUrl: './product-form.component.scss'
 })
 export class ProductFormComponent {
+  /**
+   * Formulario reactivo para la creación del producto.
+   */
   productForm: FormGroup;
+
+  /**
+   * Fecha actual, utilizada para validaciones de fecha.
+   */
   today: Date = new Date();
+
+  /**
+   * Indica si se está realizando una operación de guardado.
+   */
   loading = false;
+
+  /**
+   * Mensaje de éxito tras crear el producto.
+   */
   successMessage: string | null = null;
+
+  /**
+   * Mensaje de error en caso de fallo al crear el producto.
+   */
   errorMessage: string | null = null;
 
+  /**
+   * Inyecta servicios para formularios y operaciones de producto.
+   */
   constructor(private fb: FormBuilder, private productService: FinancialProductService) {
+    // Inicializa el formulario con validaciones estándar y personalizadas, incluyendo validación asíncrona para el ID.
     this.productForm = this.fb.group({
       id: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)], [this.idExistsValidator()]],
       name: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
@@ -30,7 +58,10 @@ export class ProductFormComponent {
     });
   }
 
-  // Validador asíncrono para verificar si el ID ya existe (usa el endpoint real)
+  /**
+   * Validador asíncrono para verificar si el ID ya existe en la base de datos.
+   * @returns AsyncValidatorFn
+   */
   idExistsValidator(): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
       // Si el campo es inválido localmente, ignora la validación asíncrona
@@ -45,7 +76,9 @@ export class ProductFormComponent {
     };
   }
 
-  // Validador para fecha de liberación >= hoy
+  /**
+   * Validador para que la fecha de liberación no sea anterior a hoy.
+   */
   dateReleaseValidator() {
     return (control: AbstractControl): ValidationErrors | null => {
       if (!control.value) return null;
@@ -59,7 +92,9 @@ export class ProductFormComponent {
     };
   }
 
-  // Validador para fecha de revisión = fecha de liberación + 1 año
+  /**
+   * Validador para que la fecha de revisión sea exactamente un año después de la fecha de liberación.
+   */
   dateRevisionValidator() {
     return (control: AbstractControl): ValidationErrors | null => {
       if (!control.parent) return null;
@@ -81,7 +116,10 @@ export class ProductFormComponent {
     };
   }
 
-  // Submit: espera validación asíncrona
+  /**
+   * Envía el formulario si es válido, crea el producto y gestiona los mensajes de estado.
+   * Realiza validación asíncrona antes de enviar.
+   */
   onSubmit() {
     // Para asegurar el estado actualizado del form, llama a updateValueAndValidity de forma explícita
     this.productForm.updateValueAndValidity();
@@ -120,6 +158,11 @@ export class ProductFormComponent {
     }
   }
 
+  /**
+   * Formatea una fecha a formato yyyy-MM-dd.
+   * @param date Fecha a formatear.
+   * @returns Fecha en formato yyyy-MM-dd.
+   */
   formatDate(date: string): string {
     if (!date) return '';
     const d = new Date(date);
@@ -128,11 +171,17 @@ export class ProductFormComponent {
     return `${d.getFullYear()}-${month}-${day}`;
   }
 
+  /**
+   * Resetea el formulario a su estado inicial y limpia los estados de validación.
+   */
   onReset() {
     this.productForm.reset();
     this.productForm.markAsPristine();
     this.productForm.markAsUntouched();
   }
 
+  /**
+   * Acceso rápido a los controles del formulario para facilitar la validación en la vista.
+   */
   get f() { return this.productForm.controls; }
 }
