@@ -1,10 +1,12 @@
 
 <p align="center">
-  <img src="https://img.shields.io/badge/angular-v16-red"/>
-  <img src="https://img.shields.io/badge/typescript-v5.2-blue"/>
+  <img src="https://img.shields.io/badge/angular-v17.2.0-red"/>
+  <img src="https://img.shields.io/badge/typescript-v5.3.2-blue"/>
+  <img src="https://img.shields.io/badge/jest-v29.7.0-ff69b4"/>
   <img src="https://img.shields.io/badge/coverage-80%25-brightgreen"/>
   <img src="https://img.shields.io/badge/prueba-100%25%20cubierta-blueviolet"/>
 </p>
+
 
 
 # Financial Products App
