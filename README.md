@@ -3,7 +3,6 @@
 <p align="center">
   <img src="https://img.shields.io/badge/angular-v16-red"/>
   <img src="https://img.shields.io/badge/coverage-80%25-brightgreen"/>
-  <img src="https://img.shields.io/badge/license-MIT-blue"/>
 </p>
 
 # Financial Products App
