@@ -126,7 +126,7 @@
             </thead>
             <tbody>
               <tr *ngIf="displayedProducts.length === 0">
-                <td colspan="5" style="text-align: center; color: #b0b3b8">
+                <td colspan="6" style="text-align: center; color: #b0b3b8">
                   Sin resultados
                 </td>
               </tr>
@@ -142,6 +142,9 @@
                 <td>{{ product.description }}</td>
                 <td>{{ product.date_release | date : "dd/MM/yyyy" }}</td>
                 <td>{{ product.date_revision | date : "dd/MM/yyyy" }}</td>
+                <td>
+                  <app-product-dropdown [product]="product"></app-product-dropdown>
+                </td>
               </tr>
             </tbody>
           </table>

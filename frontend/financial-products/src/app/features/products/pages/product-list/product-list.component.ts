@@ -4,11 +4,12 @@ import { RouterModule } from '@angular/router';
 import { HeaderComponent } from '../../../../shared/components/header/header.component';
 import { FinancialProductService } from '../../services/financial-product.service';
 import { FinancialProduct } from '../../../../core/models/financial-product.model';
+import { ProductDropdownComponent } from '../../components/product-dropdown/product-dropdown.component';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [NgFor, NgIf, DatePipe, RouterModule, HeaderComponent],
+  imports: [NgFor, NgIf, DatePipe, RouterModule, ProductDropdownComponent],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.scss'
 })
