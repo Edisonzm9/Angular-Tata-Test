@@ -19,7 +19,7 @@
     <span class="bank-title">BANCO</span>
   </div>
   <div class="search-bar">
-    <input type="text" placeholder="Search..." />
+    <input #searchInput type="text" placeholder="Search..." (input)="onSearch(searchInput.value)" />
   </div>
   <div class="table-container">
     <ng-container *ngIf="loading; else tableContent">
@@ -75,21 +75,18 @@
             </tr>
           </tbody>
         </table>
-        <div class="progress-bar">
-          <div class="progress"></div>
-        </div>
-        <div class="footer">
-          <span>{{ products.length }} Resultados</span>
-          <select>
-            <option>5</option>
-            <option>10</option>
-            <option>20</option>
-          </select>
-        </div>
       </ng-container>
       <ng-template #errorContent>
         <div style="color:red; text-align:center; padding:2rem;">{{ error }}</div>
       </ng-template>
     </ng-template>
+  </div>
+  <div class="footer">
+    <span>{{ products.length }} Resultados</span>
+    <select>
+      <option>5</option>
+      <option>10</option>
+      <option>20</option>
+    </select>
   </div>
 </div>

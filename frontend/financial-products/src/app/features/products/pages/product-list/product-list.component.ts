@@ -12,8 +12,10 @@ import { FinancialProduct } from '../../../../core/models/financial-product.mode
 })
 export class ProductListComponent implements OnInit {
   products: FinancialProduct[] = [];
+  allProducts: FinancialProduct[] = [];
   loading = false;
   error: string | null = null;
+  searchTerm: string = '';
 
   constructor(private productService: FinancialProductService) {}
 
@@ -22,6 +24,7 @@ export class ProductListComponent implements OnInit {
     this.productService.getAll().subscribe({
       next: (products) => {
         this.products = products;
+        this.allProducts = products;
         this.loading = false;
       },
       error: (err) => {
@@ -29,5 +32,14 @@ export class ProductListComponent implements OnInit {
         this.loading = false;
       }
     });
+  }
+
+  onSearch(term: string): void {
+    this.searchTerm = term;
+    const lowerTerm = term.toLowerCase();
+    this.products = this.allProducts.filter(product =>
+      product.name.toLowerCase().includes(lowerTerm) ||
+      product.description.toLowerCase().includes(lowerTerm)
+    );
   }
 }

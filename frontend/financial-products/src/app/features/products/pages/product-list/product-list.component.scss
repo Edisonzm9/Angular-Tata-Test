@@ -45,12 +45,14 @@
   border-radius: 12px;
   padding: 2rem 1rem 1rem 1rem;
   box-shadow: 0 2px 8px rgba(34, 51, 107, 0.05);
+  overflow-x: auto;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 1rem;
+  min-width: 800px;
 }
 
 thead th {
