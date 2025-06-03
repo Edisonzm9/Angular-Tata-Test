@@ -161,3 +161,52 @@ tbody td {
 .add-btn:hover {
   background: #ffec99;
 }
+
+@media (max-width: 900px) {
+  .product-list-container {
+    padding: 1rem;
+    max-width: 98vw;
+  }
+  .table-container {
+    padding: 1rem 0.2rem 0.5rem 0.2rem;
+  }
+  table {
+    min-width: 600px;
+  }
+}
+
+@media (max-width: 600px) {
+  .product-list-container {
+    padding: 0.5rem;
+    border-radius: 0;
+    margin: 0;
+  }
+  .header, .top-bar, .footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .bank-title {
+    font-size: 1.2rem;
+  }
+  .search-bar input {
+    width: 100%;
+    font-size: 0.95rem;
+  }
+  .table-container {
+    padding: 0.5rem 0.1rem 0.2rem 0.1rem;
+    border-radius: 0;
+  }
+  table {
+    min-width: 350px;
+    font-size: 0.92rem;
+  }
+  .add-btn, .footer select {
+    width: 100%;
+    font-size: 1rem;
+    padding: 0.6rem 1rem;
+  }
+  .add-button-bar {
+    margin-bottom: 0.7rem;
+  }
+}
