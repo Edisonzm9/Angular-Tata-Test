@@ -64,6 +64,9 @@
             </tr>
           </thead>
           <tbody>
+            <tr *ngIf="products.length === 0">
+              <td colspan="5" style="text-align:center; color: #b0b3b8;">Sin resultados</td>
+            </tr>
             <tr *ngFor="let product of products">
               <td>
                 <img [src]="product.logo || 'assets/bank.svg'" alt="Logo" class="logo-placeholder" />
@@ -82,7 +85,9 @@
     </ng-template>
   </div>
   <div class="footer">
-    <span>{{ products.length }} Resultados</span>
+    <span>
+      {{ products.length === 0 ? 'Sin resultados' : (products.length === 1 ? '1 Resultado' : products.length + ' Resultados') }}
+    </span>
     <select>
       <option>5</option>
       <option>10</option>
