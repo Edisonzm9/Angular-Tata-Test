@@ -62,4 +62,49 @@ export class FinancialProductService {
       })
     );
   }
+
+  getById(id: string): Observable<FinancialProduct> {
+    return this.http.get<any>(`${this.API_URL}/${id}`)
+      .pipe(
+        map(resp => resp.data ? resp.data : resp),
+        catchError((error) => {
+          if (error.status === 404) {
+            return throwError(() => ({
+              message: 'Producto no encontrado.',
+              status: 404
+            }));
+          } else {
+            return throwError(() => ({
+              message: 'Error inesperado al obtener el producto.',
+              status: error.status || 500
+            }));
+          }
+        })
+      );
+  }
+
+  updateProduct(id: string, product: FinancialProduct): Observable<any> {
+    return this.http.put(`${this.API_URL}/${id}`, product).pipe(
+      map((resp: any) => resp),
+      catchError((error) => {
+        if (error.status === 400) {
+          return throwError(() => ({
+            message: error.error?.message || 'Solicitud inválida. Verifique los datos.',
+            status: 400,
+            errors: error.error?.errors || null
+          }));
+        } else if (error.status === 404) {
+          return throwError(() => ({
+            message: 'No se encontró el recurso solicitado.',
+            status: 404
+          }));
+        } else {
+          return throwError(() => ({
+            message: 'Error inesperado en el servidor.',
+            status: error.status || 500
+          }));
+        }
+      })
+    );
+  }
 }
