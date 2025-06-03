@@ -11,11 +11,12 @@ import { FinancialProduct } from '../../../../core/models/financial-product.mode
   styleUrl: './product-list.component.scss'
 })
 export class ProductListComponent implements OnInit {
-  products: FinancialProduct[] = [];
   allProducts: FinancialProduct[] = [];
+  displayedProducts: FinancialProduct[] = [];
   loading = false;
   error: string | null = null;
   searchTerm: string = '';
+  pageSize: number = 5;
 
   constructor(private productService: FinancialProductService) {}
 
@@ -23,11 +24,11 @@ export class ProductListComponent implements OnInit {
     this.loading = true;
     this.productService.getAll().subscribe({
       next: (products) => {
-        this.products = products;
         this.allProducts = products;
+        this.updateDisplayedProducts();
         this.loading = false;
       },
-      error: (err) => {
+      error: () => {
         this.error = 'Error al cargar los productos';
         this.loading = false;
       }
@@ -35,11 +36,23 @@ export class ProductListComponent implements OnInit {
   }
 
   onSearch(term: string): void {
-    this.searchTerm = term;
-    const lowerTerm = term.toLowerCase();
-    this.products = this.allProducts.filter(product =>
+    this.searchTerm = term.trim();
+    this.updateDisplayedProducts();
+  }
+
+  onPageSizeChange(event: Event): void {
+    const value = (event.target as HTMLSelectElement).value;
+    this.pageSize = +value;
+    this.updateDisplayedProducts();
+  }
+
+  private updateDisplayedProducts(): void {
+    const lowerTerm = this.searchTerm.toLowerCase();
+    const filtered = this.allProducts.filter(product =>
       product.name.toLowerCase().includes(lowerTerm) ||
       product.description.toLowerCase().includes(lowerTerm)
     );
+    this.displayedProducts = filtered.slice(0, this.pageSize);
   }
 }
+
