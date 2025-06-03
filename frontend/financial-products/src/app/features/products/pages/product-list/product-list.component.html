@@ -20,14 +20,17 @@
     <span class="bank-title">BANCO</span>
   </div>
 
-  <!-- Barra de búsqueda -->
-  <div class="search-bar">
-    <input
-      #searchInput
-      type="text"
-      placeholder="Buscar producto..."
-      (input)="onSearch(searchInput.value)"
-    />
+  <!-- Barra superior con búsqueda y botón Agregar -->
+  <div class="top-bar">
+    <div class="search-bar">
+      <input
+        #searchInput
+        type="text"
+        placeholder="Search..."
+        (input)="onSearch(searchInput.value)"
+      />
+    </div>
+    <button class="add-btn" type="button">Agregar</button>
   </div>
 
   <!-- Tabla de productos -->
