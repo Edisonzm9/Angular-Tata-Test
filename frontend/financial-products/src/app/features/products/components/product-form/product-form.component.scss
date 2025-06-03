@@ -1,0 +1,118 @@
+.form-container {
+  background: #fff;
+  border-radius: 12px;
+  max-width: 650px;
+  margin: 2rem auto;
+  padding: 2.5rem 2.5rem 2rem 2.5rem;
+  box-shadow: 0 2px 8px rgba(34, 51, 107, 0.05);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.bank-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #22336b;
+  letter-spacing: 2px;
+}
+
+.form-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+  color: #22336b;
+}
+
+.product-form {
+  width: 100%;
+}
+
+.form-row {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1.2rem;
+}
+
+.form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: 600;
+  color: #22336b;
+  margin-bottom: 0.3rem;
+}
+
+input[type="text"] {
+  padding: 0.7rem 1rem;
+  border: 1.5px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  margin-bottom: 0.2rem;
+  background: #fff;
+  transition: border 0.2s;
+}
+
+input[type="text"].error {
+  border: 2px solid #e53935;
+}
+
+input[disabled] {
+  background: #f5f7fa;
+  color: #b0b3b8;
+}
+
+.error-message {
+  color: #e53935;
+  font-size: 0.95rem;
+  margin-bottom: 0.2rem;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  margin-top: 2rem;
+}
+
+.reset-btn {
+  background: #e5e7eb;
+  color: #22336b;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7rem 2.2rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.reset-btn:hover {
+  background: #d1d5db;
+}
+
+.submit-btn {
+  background: #ffe04b;
+  color: #22336b;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7rem 2.2rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.submit-btn:hover {
+  background: #ffec99;
+}
