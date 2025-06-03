@@ -95,10 +95,26 @@ input[disabled] {
   color: #b0b3b8;
 }
 
+.success-message {
+  color: #2e7d32;
+  background: #e8f5e9;
+  border: 1.5px solid #2e7d32;
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 1.05rem;
+}
+
 .error-message {
   color: #e53935;
-  font-size: 0.95rem;
-  margin-bottom: 0.2rem;
+  background: #fff5f5;
+  border: 1.5px solid #e53935;
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 1.05rem;
 }
 
 .form-actions {

@@ -16,4 +16,8 @@ export class FinancialProductService {
     return this.http.get<{ data: FinancialProduct[] }>(this.API_URL)
       .pipe(map(resp => resp.data));
   }
+
+  createProduct(product: FinancialProduct): Observable<any> {
+    return this.http.post(this.API_URL, product);
+  }
 }

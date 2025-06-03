@@ -4,18 +4,20 @@ import { FinancialProductService } from '../../services/financial-product.servic
 import { Observable, of } from 'rxjs';
 import { map, catchError, debounceTime, switchMap, first } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from '../../../../shared/components/header/header.component';
 
 @Component({
   selector: 'app-product-form',
   standalone: true,
-  imports: [HeaderComponent, ReactiveFormsModule, CommonModule],
+  imports: [ ReactiveFormsModule, CommonModule],
   templateUrl: './product-form.component.html',
   styleUrl: './product-form.component.scss'
 })
 export class ProductFormComponent {
   productForm: FormGroup;
   today: Date = new Date();
+  loading = false;
+  successMessage: string | null = null;
+  errorMessage: string | null = null;
 
   constructor(private fb: FormBuilder, private productService: FinancialProductService) {
     this.productForm = this.fb.group({
@@ -81,10 +83,34 @@ export class ProductFormComponent {
 
   onSubmit() {
     if (this.productForm.valid) {
-      // Procesar el formulario
+      this.loading = true;
+      this.successMessage = null;
+      this.errorMessage = null;
+      const formValue = { ...this.productForm.value };
+      // Formatear fechas a yyyy-MM-dd
+      formValue.date_release = this.formatDate(formValue.date_release);
+      formValue.date_revision = this.formatDate(formValue.date_revision);
+      this.productService.createProduct(formValue).subscribe({
+        next: (resp) => {
+          this.successMessage = 'Producto agregado exitosamente.';
+          this.loading = false;
+          this.productForm.reset();
+        },
+        error: (err) => {
+          this.errorMessage = err?.error?.message || 'Error al guardar el producto.';
+          this.loading = false;
+        }
+      });
     } else {
       this.productForm.markAllAsTouched();
     }
+  }
+
+  formatDate(date: string): string {
+    const d = new Date(date);
+    const month = (d.getMonth() + 1).toString().padStart(2, '0');
+    const day = d.getDate().toString().padStart(2, '0');
+    return `${d.getFullYear()}-${month}-${day}`;
   }
 
   onReset() {
