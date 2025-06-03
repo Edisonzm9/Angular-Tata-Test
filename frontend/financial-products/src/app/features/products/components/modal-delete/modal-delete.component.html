@@ -1,1 +1,13 @@
-<p>modal-delete works!</p>
+<div class="modal-overlay">
+  <div class="modal-box">
+    <div class="modal-content">
+      <p class="modal-message">
+        ¿Estás seguro de eliminar el producto <b>{{ productName }}</b>?
+      </p>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel" type="button" (click)="onCancel()">Cancelar</button>
+      <button class="btn-confirm" type="button" (click)="onConfirm()">Confirmar</button>
+    </div>
+  </div>
+</div>

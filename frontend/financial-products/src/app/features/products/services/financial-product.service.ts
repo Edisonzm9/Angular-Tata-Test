@@ -107,4 +107,23 @@ export class FinancialProductService {
       })
     );
   }
+
+  deleteProduct(id: string): Observable<any> {
+    return this.http.delete(`${this.API_URL}/${id}`).pipe(
+      map((resp: any) => resp),
+      catchError((error) => {
+        if (error.status === 404) {
+          return throwError(() => ({
+            message: 'No se encontró el producto.',
+            status: 404
+          }));
+        } else {
+          return throwError(() => ({
+            message: 'Error inesperado al eliminar el producto.',
+            status: error.status || 500
+          }));
+        }
+      })
+    );
+  }
 }

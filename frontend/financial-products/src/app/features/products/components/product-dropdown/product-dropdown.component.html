@@ -8,5 +8,12 @@
   </button>
   <div class="dropdown-menu" *ngIf="showMenu">
     <button class="dropdown-item" (click)="editProduct()">Editar</button>
+    <button class="dropdown-item" (click)="deleteProduct()">Eliminar</button>
   </div>
+  <app-modal-delete
+    *ngIf="showDeleteModal"
+    [productName]="product.name"
+    (cancel)="onCancelDelete()"
+    (confirm)="onConfirmDelete()"
+  ></app-modal-delete>
 </div>
