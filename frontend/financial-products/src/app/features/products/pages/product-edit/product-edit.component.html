@@ -7,7 +7,7 @@
       <div class="form-row">
         <div class="form-group">
           <label for="id">ID</label>
-          <input id="id" type="text" formControlName="id" [disabled]="true" [class.error]="f['id'].invalid && (f['id'].touched || f['id'].dirty)" />
+          <input id="id" type="text" formControlName="id" [class.error]="f['id'].invalid && (f['id'].touched || f['id'].dirty)" />
           <div class="error-message" *ngIf="f['id'].errors && (f['id'].touched || f['id'].dirty)">
             <ng-container *ngIf="f['id'].errors['required']">El ID es requerido.</ng-container>
             <ng-container *ngIf="f['id'].errors['minlength']">El ID debe tener al menos 3 caracteres.</ng-container>

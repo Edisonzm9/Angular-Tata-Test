@@ -10,7 +10,7 @@ import { environment } from '../../../../environments/environment.prod';
 export class FinancialProductService {
   private readonly API_URL = environment.api.products;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getAll(): Observable<FinancialProduct[]> {
     return this.http.get<{ data: FinancialProduct[] }>(this.API_URL)
@@ -107,6 +107,12 @@ export class FinancialProductService {
       })
     );
   }
+
+  // financial-product.service.ts
+  verifyId(id: string): Observable<boolean> {
+    return this.http.get<boolean>(`/bp/products/verification/${id}`);
+  }
+
 
   deleteProduct(id: string): Observable<any> {
     return this.http.delete(`${this.API_URL}/${id}`).pipe(
