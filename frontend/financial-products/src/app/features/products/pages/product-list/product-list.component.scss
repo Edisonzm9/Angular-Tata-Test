@@ -109,11 +109,21 @@ tbody td {
   background: #b0b3b8;
 }
 
+.table-scroll {
+  overflow-x: auto;
+}
+
 .footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-top: 0.5rem;
+  padding: 0 0.5rem 1rem 0.5rem;
+}
+
+.footer span {
+  color: #22336b;
+  font-size: 1rem;
 }
 
 .footer select {

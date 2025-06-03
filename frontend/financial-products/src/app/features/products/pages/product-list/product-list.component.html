@@ -14,160 +14,160 @@
 
   <!-- Tabla de productos -->
   <div class="table-container">
-    <ng-container *ngIf="loading; else tableContent">
-      <div style="text-align: center; padding: 2rem">Cargando productos...</div>
-    </ng-container>
-    <ng-template #tableContent>
-      <ng-container *ngIf="!error; else errorContent">
-        <table>
-          <thead>
-            <tr>
-              <th>Logo</th>
-              <th>Nombre del producto</th>
-              <th>
-                Descripción
-                <span title="Breve descripción del producto financiero.">
-                  <svg
-                    class="info"
-                    width="16"
-                    height="16"
-                    fill="none"
-                    stroke="#b0b3b8"
-                    stroke-width="2"
-                    viewBox="0 0 24 24"
-                  >
-                    <circle
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="#b0b3b8"
-                      stroke-width="2"
-                    />
-                    <line
-                      x1="12"
-                      y1="16"
-                      x2="12"
-                      y2="12"
-                      stroke="#b0b3b8"
-                      stroke-width="2"
-                    />
-                    <circle cx="12" cy="8" r="1" fill="#b0b3b8" />
-                  </svg>
-                </span>
-              </th>
-              <th>
-                Fecha de liberación
-                <span
-                  title="Fecha en la que el producto fue lanzado al mercado."
-                >
-                  <svg
-                    class="info"
-                    width="16"
-                    height="16"
-                    fill="none"
-                    stroke="#b0b3b8"
-                    stroke-width="2"
-                    viewBox="0 0 24 24"
-                  >
-                    <circle
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="#b0b3b8"
-                      stroke-width="2"
-                    />
-                    <line
-                      x1="12"
-                      y1="16"
-                      x2="12"
-                      y2="12"
-                      stroke="#b0b3b8"
-                      stroke-width="2"
-                    />
-                    <circle cx="12" cy="8" r="1" fill="#b0b3b8" />
-                  </svg>
-                </span>
-              </th>
-              <th>
-                Fecha de reestructuración
-                <span
-                  title="Última fecha en la que el producto fue modificado o actualizado."
-                >
-                  <svg
-                    class="info"
-                    width="16"
-                    height="16"
-                    fill="none"
-                    stroke="#b0b3b8"
-                    stroke-width="2"
-                    viewBox="0 0 24 24"
-                  >
-                    <circle
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="#b0b3b8"
-                      stroke-width="2"
-                    />
-                    <line
-                      x1="12"
-                      y1="16"
-                      x2="12"
-                      y2="12"
-                      stroke="#b0b3b8"
-                      stroke-width="2"
-                    />
-                    <circle cx="12" cy="8" r="1" fill="#b0b3b8" />
-                  </svg>
-                </span>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngIf="displayedProducts.length === 0">
-              <td colspan="5" style="text-align: center; color: #b0b3b8">
-                Sin resultados
-              </td>
-            </tr>
-            <tr *ngFor="let product of displayedProducts">
-              <td>
-                <img
-                  [src]="product.logo || 'assets/bank.svg'"
-                  alt="Logo"
-                  class="logo-placeholder"
-                />
-              </td>
-              <td>{{ product.name }}</td>
-              <td>{{ product.description }}</td>
-              <td>{{ product.date_release | date : "dd/MM/yyyy" }}</td>
-              <td>{{ product.date_revision | date : "dd/MM/yyyy" }}</td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="table-scroll">
+      <ng-container *ngIf="loading; else tableContent">
+        <div style="text-align: center; padding: 2rem">Cargando productos...</div>
       </ng-container>
-      <ng-template #errorContent>
-        <div style="color: red; text-align: center; padding: 2rem">
-          {{ error }}
-        </div>
+      <ng-template #tableContent>
+        <ng-container *ngIf="!error; else errorContent">
+          <table>
+            <thead>
+              <tr>
+                <th>Logo</th>
+                <th>Nombre del producto</th>
+                <th>
+                  Descripción
+                  <span title="Breve descripción del producto financiero.">
+                    <svg
+                      class="info"
+                      width="16"
+                      height="16"
+                      fill="none"
+                      stroke="#b0b3b8"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="#b0b3b8"
+                        stroke-width="2"
+                      />
+                      <line
+                        x1="12"
+                        y1="16"
+                        x2="12"
+                        y2="12"
+                        stroke="#b0b3b8"
+                        stroke-width="2"
+                      />
+                      <circle cx="12" cy="8" r="1" fill="#b0b3b8" />
+                    </svg>
+                  </span>
+                </th>
+                <th>
+                  Fecha de liberación
+                  <span
+                    title="Fecha en la que el producto fue lanzado al mercado."
+                  >
+                    <svg
+                      class="info"
+                      width="16"
+                      height="16"
+                      fill="none"
+                      stroke="#b0b3b8"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="#b0b3b8"
+                        stroke-width="2"
+                      />
+                      <line
+                        x1="12"
+                        y1="16"
+                        x2="12"
+                        y2="12"
+                        stroke="#b0b3b8"
+                        stroke-width="2"
+                      />
+                      <circle cx="12" cy="8" r="1" fill="#b0b3b8" />
+                    </svg>
+                  </span>
+                </th>
+                <th>
+                  Fecha de reestructuración
+                  <span
+                    title="Última fecha en la que el producto fue modificado o actualizado."
+                  >
+                    <svg
+                      class="info"
+                      width="16"
+                      height="16"
+                      fill="none"
+                      stroke="#b0b3b8"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="#b0b3b8"
+                        stroke-width="2"
+                      />
+                      <line
+                        x1="12"
+                        y1="16"
+                        x2="12"
+                        y2="12"
+                        stroke="#b0b3b8"
+                        stroke-width="2"
+                      />
+                      <circle cx="12" cy="8" r="1" fill="#b0b3b8" />
+                    </svg>
+                  </span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngIf="displayedProducts.length === 0">
+                <td colspan="5" style="text-align: center; color: #b0b3b8">
+                  Sin resultados
+                </td>
+              </tr>
+              <tr *ngFor="let product of displayedProducts">
+                <td>
+                  <img
+                    [src]="product.logo || 'assets/bank.svg'"
+                    alt="Logo"
+                    class="logo-placeholder"
+                  />
+                </td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.description }}</td>
+                <td>{{ product.date_release | date : "dd/MM/yyyy" }}</td>
+                <td>{{ product.date_revision | date : "dd/MM/yyyy" }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </ng-container>
+        <ng-template #errorContent>
+          <div style="color: red; text-align: center; padding: 2rem">
+            {{ error }}
+          </div>
+        </ng-template>
       </ng-template>
-    </ng-template>
-  </div>
-  
-  <!-- Footer con contador y select -->
-  <div class="footer">
-    <span>
-      {{
-        displayedProducts.length === 0
-          ? "Sin resultados"
-          : displayedProducts.length === 1
-          ? "1 resultado"
-          : displayedProducts.length + " resultados"
-      }}
-    </span>
-    <select [value]="pageSize" (change)="onPageSizeChange($event)">
-      <option>5</option>
-      <option>10</option>
-      <option>20</option>
-    </select>
+    </div>
+    <div class="footer">
+      <span>
+        {{
+          displayedProducts.length === 0
+            ? "Sin resultados"
+            : displayedProducts.length === 1
+            ? "1 resultado"
+            : displayedProducts.length + " resultados"
+        }}
+      </span>
+      <select [value]="pageSize" (change)="onPageSizeChange($event)">
+        <option>5</option>
+        <option>10</option>
+        <option>20</option>
+      </select>
+    </div>
   </div>
 </div>
