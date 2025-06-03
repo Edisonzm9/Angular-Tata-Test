@@ -16,7 +16,29 @@
   <div class="table-container">
     <div class="table-scroll">
       <ng-container *ngIf="loading; else tableContent">
-        <div style="text-align: center; padding: 2rem">Cargando productos...</div>
+        <!-- Skeleton Loader -->
+        <table>
+          <thead>
+            <tr>
+              <th>Logo</th>
+              <th>Nombre del producto</th>
+              <th>Descripción</th>
+              <th>Fecha de liberación</th>
+              <th>Fecha de reestructuración</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let i of [1,2,3,4,5]">
+              <td><div class="skeleton skeleton-logo"></div></td>
+              <td><div class="skeleton skeleton-text"></div></td>
+              <td><div class="skeleton skeleton-text"></div></td>
+              <td><div class="skeleton skeleton-text short"></div></td>
+              <td><div class="skeleton skeleton-text short"></div></td>
+              <td><div class="skeleton skeleton-btn"></div></td>
+            </tr>
+          </tbody>
+        </table>
       </ng-container>
       <ng-template #tableContent>
         <ng-container *ngIf="!error; else errorContent">
